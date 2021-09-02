@@ -244,6 +244,7 @@ bool Pacman::Draw()
 {
 	std::list<Ghost*>::iterator ghostIterator;
 	myWorld->Draw(myDrawer);
+	myAvatar->ChangeAvatarSpriteByDirection(myNextMovement);
 	myAvatar->Draw(myDrawer);
 	for (ghostIterator = ghosts.begin(); ghostIterator != ghosts.end(); ghostIterator++)
 		(*ghostIterator)->Draw(myDrawer);
