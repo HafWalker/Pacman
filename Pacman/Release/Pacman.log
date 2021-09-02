@@ -1,0 +1,39 @@
+﻿  Avatar.cpp
+d:\projects\pacman\pacman\Vector2f.h(72): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+Avatar.cpp(17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  BigDot.cpp
+d:\projects\pacman\pacman\Vector2f.h(72): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Cherry.cpp
+d:\projects\pacman\pacman\Vector2f.h(72): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Dot.cpp
+d:\projects\pacman\pacman\Vector2f.h(72): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Drawer.cpp
+  GameEntity.cpp
+d:\projects\pacman\pacman\Vector2f.h(72): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Ghost.cpp
+Ghost.cpp(72): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  main.cpp
+d:\projects\pacman\pacman\Vector2f.h(72): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  MovableGameEntity.cpp
+d:\projects\pacman\pacman\Vector2f.h(72): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+MovableGameEntity.cpp(6): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+MovableGameEntity.cpp(7): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Pacman.cpp
+d:\projects\pacman\pacman\Vector2f.h(72): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+Pacman.cpp(132): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+Pacman.cpp(133): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  PathmapTile.cpp
+  StaticGameEntity.cpp
+d:\projects\pacman\pacman\Vector2f.h(72): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Vector2f.cpp
+d:\projects\pacman\pacman\Vector2f.h(72): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  World.cpp
+World.cpp(65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+World.cpp(65): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+World.cpp(92): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+World.cpp(92): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+  Generating code
+  All 589 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Pacman.vcxproj -> D:\Projects\Pacman\Release\Pacman.exe
+  Pacman.vcxproj -> D:\Projects\Pacman\Release\Pacman.pdb (Full PDB)
