@@ -3,12 +3,15 @@
 #include "PathmapTile.h"
 #include "Drawer.h"
 #include "Avatar.h"
+#include <iostream>
 
-Ghost::Ghost(const Vector2f& aPosition, Sprite* entitySprite, GhostBehavior behavior)
+Ghost::Ghost(const Vector2f& aPosition, Sprite* entitySprite, GhostBehavior behavior, GhostType type)
 	: MovableGameEntity(aPosition, entitySprite),
 	myBehavior(behavior)
 {
-	sprite->SetFrame("ghost_32_cyan.png");
+	ghostType = type;
+
+	SwitchGhostSpriteByType(ghostType);
 
 	myIsClaimableFlag = false;
 	myIsDeadFlag = false;
@@ -96,6 +99,27 @@ void Ghost::SetImage(std::string anImage)
 	sprite->SetFrame(anImage);
 }
 
+void Ghost::SwitchGhostSpriteByType(GhostType type)
+{
+	switch (type)
+	{
+	case Ghost::Cyan:
+		sprite->SetFrame("ghost_32_cyan.png");
+		break;
+	case Ghost::Orange:
+		sprite->SetFrame("ghost_32_orange.png");
+		break;
+	case Ghost::Pink:
+		sprite->SetFrame("ghost_32_pink.png");
+		break;
+	case Ghost::Red:
+		sprite->SetFrame("ghost_32_red.png");
+		break;
+	default:
+		break;
+	}
+}
+
 void Ghost::BehaveWander()
 {
 	MovementDirection nextDirection = (MovementDirection)(rand() % DirectionCount);
@@ -124,6 +148,7 @@ void Ghost::BehaveWander()
 
 void Ghost::BehaveChase(World* aWorld, Avatar* avatar)
 {
+	std::cout << "CHASE" << std::endl;
 	myPath.clear();
 	aWorld->GetPath(myCurrentTileX, myCurrentTileY, avatar->GetCurrentTileX(), avatar->GetCurrentTileY(), myPath);
 }

@@ -20,7 +20,17 @@ public:
 		Fear,
 	};
 
-	Ghost(const Vector2f& aPosition, Sprite* entitySprite, GhostBehavior behavior);
+	enum GhostType
+	{
+		Cyan,
+		Orange,
+		Pink,
+		Red,
+	};
+
+	GhostType ghostType;
+
+	Ghost(const Vector2f& aPosition, Sprite* entitySprite, GhostBehavior behavior, GhostType type);
 	~Ghost(void);
 
 	void Update(float aTime, World* aWorld, Avatar* avatar);
@@ -33,6 +43,8 @@ public:
 	void Die(World* aWorld);
 
 protected:
+	void SwitchGhostSpriteByType(GhostType type);
+
 	void BehaveWander();
 	void BehaveChase(World* aWorld, Avatar* avatar);
 	void BehaveIntercept(World* aWorld, Avatar* avatar);
