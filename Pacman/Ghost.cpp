@@ -11,6 +11,24 @@ Ghost::Ghost(const Vector2f& aPosition, Sprite* entitySprite, GhostBehavior beha
 {
 	ghostType = type;
 
+	switch (type)
+	{
+	case Ghost::Cyan:
+		wanderTarget = Vector2f(25.f,0.f);
+		break;
+	case Ghost::Orange:
+		wanderTarget = Vector2f(0.f, 28.f);
+		break;
+	case Ghost::Pink:
+		wanderTarget = Vector2f(0.f, 0.f);
+		break;
+	case Ghost::Red:
+		wanderTarget = Vector2f(25.f, 28.f);
+		break;
+	default:
+		break;
+	}
+
 	SwitchGhostSpriteByType(ghostType);
 
 	myIsClaimableFlag = false;

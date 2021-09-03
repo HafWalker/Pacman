@@ -29,6 +29,7 @@ public:
 	};
 
 	GhostType ghostType;
+	Vector2f wanderTarget;
 
 	Ghost(const Vector2f& aPosition, Sprite* entitySprite, GhostBehavior behavior, GhostType type);
 	~Ghost(void);
