@@ -16,6 +16,9 @@ public:
 		DirectionCount = 4
 	};
 
+	Vector2f nextMoveDirection;
+	std::list<Vector2f> posibleDirections;
+
 	MovableGameEntity(const Vector2f& aPosition, Sprite* entitySprite);
 	~MovableGameEntity(void);
 
@@ -34,6 +37,12 @@ protected:
 
 	int myNextTileX;
 	int myNextTileY;
+
+private:
+	void SubstractCurrentMoveDirection();
+	void GetAvailableDirectionsToMove();
+	void GetSmallerVectorDirection();
+	void GetPriorityVector();
 };
 
 #endif // MOVABLEGAMEENTITY_H

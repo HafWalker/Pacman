@@ -1,4 +1,5 @@
 #include "Avatar.h"
+#include <iostream>
 
 Avatar::Avatar(const Vector2f& aPosition, Sprite* entitySprite)
 : MovableGameEntity(aPosition, entitySprite)
@@ -24,6 +25,7 @@ void Avatar::Update(float aTime)
 		myPosition = destination;
 		myCurrentTileX = myNextTileX;
 		myCurrentTileY = myNextTileY;
+		//std::cout << "X:" << myCurrentTileX << " - " << "Y:" << myCurrentTileY << std::endl;
 	}
 	else
 	{

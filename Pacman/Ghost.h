@@ -29,7 +29,12 @@ public:
 	};
 
 	GhostType ghostType;
+
+	int tileSize = 22;
 	Vector2f wanderTarget;
+	Vector2f forcedRespawnTarget;
+	Vector2f currentDirection;
+	Vector2f targetPosition;
 
 	Ghost(const Vector2f& aPosition, Sprite* entitySprite, GhostBehavior behavior, GhostType type);
 	~Ghost(void);
@@ -58,6 +63,15 @@ protected:
 
 	std::list<PathmapTile*> myPath;
 
+	void SetNextTileToTarget(World* aWorld, int targetX, int targetY);
+
+private:
+	void SubstractCurrentMoveDirection();
+	void RemoveInvalidDirections(World* aWorld);
+	void RemoveBiggestVector(World* aWorld);
+	Vector2f GetPriorityVector();
+
+	bool isInRespawnArea(int currentTileX, int currentTileY);
 };
 
 #endif // GHOST_H
