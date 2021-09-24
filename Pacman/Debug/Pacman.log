@@ -1,1 +1,31 @@
-﻿  Pacman.vcxproj -> C:\Users\Hernan\Pacman\Debug\Pacman.exe
+﻿  Ghost.cpp
+C:\Users\Hernan\Pacman\Pacman\Vector2f.h(72,14): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(102,59): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(102,35): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(190,61): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(190,43): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(193,75): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(193,50): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(230,23): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(231,23): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(241,37): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(242,37): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(281,37): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(282,37): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(332,17): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(333,17): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(359,19): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(360,19): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Ghost.cpp(362,27): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  Pacman.cpp
+C:\Users\Hernan\Pacman\Pacman\Vector2f.h(72,14): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Pacman.cpp(234,16): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\Pacman.cpp(235,16): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+  World.cpp
+C:\Users\Hernan\Pacman\Pacman\Vector2f.h(72,14): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\World.cpp(76,49): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\World.cpp(76,35): warning C4244: 'argumento': conversión de 'unsigned int' a 'float'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\World.cpp(110,55): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Hernan\Pacman\Pacman\World.cpp(110,41): warning C4244: 'argumento': conversión de 'unsigned int' a 'float'; posible pérdida de datos
+  Generando código...
+  Pacman.vcxproj -> C:\Users\Hernan\Pacman\Debug\Pacman.exe

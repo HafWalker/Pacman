@@ -57,7 +57,7 @@ Pacman::Pacman(Drawer* aDrawer)
 	ghosts.push_back(new Ghost(Vector2f(13*22,10*22), newSprite, Ghost::GhostBehavior::Wander, Ghost::GhostType::Cyan));
 	
 
-
+	
 	assetPaths.clear();
 	assetPaths.push_back("ghost_32_orange.png");
 	assetPaths.push_back("Ghost_Vulnerable_32.png");
@@ -72,7 +72,7 @@ Pacman::Pacman(Drawer* aDrawer)
 	assetPaths.push_back("Ghost_Vulnerable_32.png");
 	assetPaths.push_back("Ghost_Dead_32.png");
 	newSprite = Sprite::Create(assetPaths, myDrawer, 32, 32);
-	ghosts.push_back(new Ghost(Vector2f(13*22,10*22), newSprite, Ghost::GhostBehavior::Intercept, Ghost::GhostType::Pink));
+	ghosts.push_back(new Ghost(Vector2f(13*22,10*22), newSprite, Ghost::GhostBehavior::Wander, Ghost::GhostType::Pink));
 	
 
 	
@@ -81,7 +81,7 @@ Pacman::Pacman(Drawer* aDrawer)
 	assetPaths.push_back("Ghost_Vulnerable_32.png");
 	assetPaths.push_back("Ghost_Dead_32.png");
 	newSprite = Sprite::Create(assetPaths, myDrawer, 32, 32);
-	ghosts.push_back(new Ghost(Vector2f(13*22,10*22), newSprite, Ghost::GhostBehavior::Fear, Ghost::GhostType::Red));
+	ghosts.push_back(new Ghost(Vector2f(13*22,10*22), newSprite, Ghost::GhostBehavior::Wander, Ghost::GhostType::Red));
 	
 
 	myWorld = new World();

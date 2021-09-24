@@ -68,63 +68,65 @@ void Ghost::Update(float aTime, World* aWorld, Avatar* avatar)
 	if (myIsDeadFlag)
 		speed = 120.f;
 
-	/*
-	if (IsAtDestination())
-	{
-		if (!myPath.empty())
-		{
-			PathmapTile* nextTile = myPath.front();
-			myPath.pop_front();
-			SetNextTile(nextTile->myX, nextTile->myY);
-		}
-		else if (aWorld->TileIsValid(nextTileX, nextTileY))
-		{
-			SetNextTile(nextTileX, nextTileY);
-		}
-		else
-		{
-			if (myIsClaimableFlag)
-				BehaveVulnerable();
-			else
-			{
-				switch (myBehavior)
-				{
-				case Chase:
-					BehaveChase(aWorld, avatar);
-					break;
-				case Intercept:
-				case Fear:
-				case Wander:
-					//std::cout << "WANDERER" << std::endl;
-					//SetNextTileToTarget(aWorld, wanderTarget.myX, wanderTarget.myY);
-				default:
-					
-					break;
-				}
-			}
-
-			myIsDeadFlag = false;
-		}
+	if (myIsClaimableFlag) {
+		BehaveVulnerable();
 	}
-	*/
 
+	switch (myBehavior)
+	{
+	case Chase:
+		break;
+	case Dead :
+		break;
+	case Fear:
+
+		if (!TriggedTimer) {
+			TriggedTimer = true;
+		}
+
+		if (CheckTimer(10)) {
+			myBehavior = GhostBehavior::Wander;
+		}
+		break;
+	case Wander:
+		break;
+	default:
+		break;
+	}
+
+
+	myIsDeadFlag = false;
+
+		
 	tileSize = 22;
 	Vector2f destination(myNextTileX * tileSize, myNextTileY * tileSize);
 	currentDirection = destination - myPosition;
 
 	float distanceToMove = aTime * speed;
 
+
+	// Excecution 1 time per TILE
 	if (distanceToMove > currentDirection.Length())
 	{
 		myPosition = destination;
 		myCurrentTileX = myNextTileX;
 		myCurrentTileY = myNextTileY;
 		
-		if (!isInRespawnArea(myCurrentTileX, myCurrentTileY)) {
-			SetNextTileToTarget(aWorld, wanderTarget.myX, wanderTarget.myY);
-		}
-		else {
-			SetNextTileToTarget(aWorld, forcedRespawnTarget.myX, forcedRespawnTarget.myY);
+		switch (myBehavior)
+		{
+		case Chase:
+			break;
+		case Dead:
+			break;
+		case Fear:
+			BehaveFear(aWorld, avatar);
+			break;
+		case Wander:
+			BehaveWander(aWorld);
+			break;
+		default:
+
+			break;
 		}
 	}
 	else
@@ -160,29 +162,35 @@ void Ghost::SwitchGhostSpriteByType(GhostType type)
 	}
 }
 
-void Ghost::BehaveWander()
+void Ghost::SwitchGhostSpriteByBehaviour(GhostBehavior behaviour)
 {
-	MovementDirection nextDirection = (MovementDirection)(rand() % DirectionCount);
-	switch (nextDirection)
+	switch (behaviour)
 	{
-	case Up:
-		myDesiredMovementX = 0;
-		myDesiredMovementY = 1;
-		break;
-	case Down:
-		myDesiredMovementX = 0;
-		myDesiredMovementY = -1;
-		break;
-	case Left:
-		myDesiredMovementX = -1;
-		myDesiredMovementY = 0;
-		break;
-	case Right:
-		myDesiredMovementX = 1;
-		myDesiredMovementY = 0;
-		break;
-	default:
-		break;
+		case Chase:
+			SwitchGhostSpriteByType(ghostType);
+			break;
+		case Dead:
+			sprite->SetFrame("Ghost_Dead_32.png");
+			break;
+		case Fear:
+			sprite->SetFrame("Ghost_Vulnerable_32.png");
+			break;
+		case Wander:
+			SwitchGhostSpriteByType(ghostType);
+			break;
+		default:
+			break;
+	}
+}
+
+void Ghost::BehaveWander(World* aWorld)
+{
+	//std::cout << "WANDER" << std::endl;
+	if (!isInRespawnArea(myCurrentTileX, myCurrentTileY)) {
+		SetNextTileToTarget(aWorld, wanderTarget.myX, wanderTarget.myY);
+	}
+	else {
+		SetNextTileToTarget(aWorld, forcedRespawnTarget.myX, forcedRespawnTarget.myY);
 	}
 }
 
@@ -200,12 +208,13 @@ void Ghost::BehaveIntercept(World* aWorld, Avatar* avatar)
 
 void Ghost::BehaveFear(World* aWorld, Avatar* avatar)
 {
-
+	PickRandomTileAsTarget(aWorld);
+	SwitchGhostSpriteByBehaviour(myBehavior);
 }
 
 void Ghost::BehaveVulnerable()
 {
-
+	myBehavior = GhostBehavior::Fear;
 }
 
 void Ghost::SetNextTileToTarget(World* aWorld, int targetX, int targetY)
@@ -238,6 +247,63 @@ void Ghost::SetNextTileToTarget(World* aWorld, int targetX, int targetY)
 	SetNextTile(nextTileX, nextTileY);
 
 	//std::cout << "NEXT TILE TARGET = " << "X:" << myNextTileX << " - " << "Y:" << myNextTileY << std::endl;
+}
+
+void Ghost::PickRandomTileAsTarget(World* aWorld)
+{
+	//std::cout << "GHOST CURREN POS = " << "X:" << myCurrentTileX << " - " << "Y:" << myCurrentTileY << std::endl;
+
+	posibleDirections.clear();
+	posibleDirections.push_back(Vector2f(0, -1));	// UP
+	posibleDirections.push_back(Vector2f(1, 0));	// RIGHT
+	posibleDirections.push_back(Vector2f(0, 1));	// DOWN
+	posibleDirections.push_back(Vector2f(-1, 0));	// LEFT
+
+	//targetPosition.myX = targetX;
+	//targetPosition.myY = targetY;
+
+	if (!triggedInverseDirection) {
+		InverseSubstractCurrentMoveDirection();
+		triggedInverseDirection = true;
+	}
+	else
+	{
+		SubstractCurrentMoveDirection();
+	}
+
+	RemoveInvalidDirections(aWorld);
+
+	Vector2f nextMoveVector = GetRandomVectorFromAvailables();
+
+	//std::cout << "DESIRED MOVEMENT = " << nextMoveVector.myX << " | " << nextMoveVector.myY << std::endl;
+
+	//std::cout << "DESIRED MOVEMENT = " << nextMoveVector.myX << " | " << nextMoveVector.myY << std::endl;
+	myDesiredMovementX = nextMoveVector.myX;
+	myDesiredMovementY = nextMoveVector.myY;
+
+	int nextTileX = myCurrentTileX + myDesiredMovementX;
+	int nextTileY = myCurrentTileY - myDesiredMovementY;
+
+	SetNextTile(nextTileX, nextTileY);
+
+	//std::cout << "NEXT TILE TARGET = " << "X:" << myNextTileX << " - " << "Y:" << myNextTileY << std::endl;
+}
+
+void Ghost::InverseSubstractCurrentMoveDirection()
+{
+	currentDirection.Normalize();
+	//std::cout << "CURRENT DIRECTION = " << currentDirection.myX << " | " << currentDirection.myY << std::endl;
+	std::list<Vector2f>::const_iterator itr = posibleDirections.cbegin();
+	while (itr != posibleDirections.cend())
+	{
+		if (itr->myX == currentDirection.myX &&
+			-itr->myY == currentDirection.myY) {
+			itr = posibleDirections.erase(itr);
+		}
+		else {
+			++itr;
+		}
+	}
 }
 
 void Ghost::SubstractCurrentMoveDirection()
@@ -375,6 +441,29 @@ Vector2f Ghost::GetPriorityVector()
 	return vectorResult;
 }
 
+Vector2f Ghost::GetRandomVectorFromAvailables()
+{
+	std::list<Vector2f>::const_iterator itr = posibleDirections.cbegin();
+
+	// Random bug itr result in a random vector beacause posibleDirections is empty
+	Vector2f result = Vector2f(itr->myX, itr->myY);
+	int counter = 0;
+	int randomIndex = rand() % posibleDirections.size();
+	//std::cout << randomIndex << std::endl;
+
+	while (itr != posibleDirections.cend())
+	{
+		if (counter == randomIndex) { 
+			result = Vector2f(itr->myX, itr->myY);
+		}
+
+		counter++;
+		++itr;
+	}
+
+	return result;
+}
+
 bool Ghost::isInRespawnArea(int currentTileX, int currentTileY)
 {
 	bool result = false;
@@ -383,6 +472,23 @@ bool Ghost::isInRespawnArea(int currentTileX, int currentTileY)
 		currentTileY > 10 &&
 		currentTileY < 15) 
 	{
+		result = true;
+	}
+
+	return result;
+}
+
+bool Ghost::CheckTimer(double duration)
+{
+	bool result = false;
+	timer = std::clock(); // get current time
+
+	// Do your stuff here
+
+	clockDuration = (std::clock() - timer) / (double)CLOCKS_PER_SEC;
+	std::cout << clockDuration << std::endl;
+	if (clockDuration >= duration) {
+		std::cout << "End of Timer" << std::endl;
 		result = true;
 	}
 
